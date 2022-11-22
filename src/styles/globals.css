@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+}
+/* 
+body {
+  overflow-x: hidden;
+} */
+
+.css-1m9128y {
+  position: relative;
+  top: -40px;
+  z-index: 9;
+  color: #fff;
+}
+
+.css-8ucetn-MuiButtonBase-root-MuiIconButton-root {
+  color: #fff;
+}
+
+.css-bbreus-MuiButtonBase-root-MuiIconButton-root {
+  color: #0e2944;
+}
+
+.PhoneInputInput {
+  background-color: #fff;
+  border: 1px solid #bdbdbd !important;
+  height: 36px;
+  font-weight: 400;
+  color: #495057;
+  transition: all 200ms;
+  width: 250px;
+  border-radius: 4px;
+  padding: 0px 5px;
+  height: 40px;
+  border-radius: 6px;
+}
+.PhoneInputInput:hover {
+  border: 0.5px solid #603e949a;
+  background-color: #f5f4f6;
+  color: #495057;
+}
+.PhoneInputInput[type='number']:focus {
+  border: 0.5px solid #603e94;
+  background-color: #f5f4f6;
+  color: #495057;
+}
+.PhoneInputInput[type='number']:active {
+  border: 0.5px solid #603e94;
+  background-color: #f5f4f6;
+  color: #495057;
+}
+.PhoneInput {
+  width: 100%;
+}
+.PhoneInputCountrySelect {
+  max-width: 200px !important;
+  max-height: 200px !important;
+}
+.PhoneInputCountrySelect-input {
+  background-color: red;
+}
+
+.noHidenScroll::-webkit-scrollbar {
+  width: 0;
+}

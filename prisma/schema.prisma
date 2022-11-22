@@ -1,0 +1,230 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// user
+model User {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  second_name String
+  email       String?  @unique
+  phone       String   @unique
+  password    String
+  role        Role     @default(USER)
+  country     String?
+  state       String?
+  city        String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  last_visit  DateTime @default(now())
+}
+
+enum Role {
+  USER
+  SUPER_USER
+}
+
+// ============================================================================
+
+// core
+model Provider {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  title         String   @unique
+  slug          String   @unique
+  ceo_name      String
+  address       String
+  state         String
+  city          String
+  phone         String   @unique
+  logo          String
+  about         String?
+  photo_assets  String[] @default([])
+  video_assets  String[] @default([])
+  website_url   String?
+  telegram_url  String?
+  instagram_url String?
+  facebook_url  String?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  Course        Course[]
+}
+
+model Category {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  title       String        @unique
+  slug        String        @unique
+  icon        String?
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
+  Subcategory Subcategory[]
+  Course      Course[]
+}
+
+model Subcategory {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String   @unique
+  slug        String   @unique
+  description String?
+  category    Category @relation(fields: [category_id], references: [id])
+  category_id String   @db.ObjectId
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  Course      Course[]
+}
+
+model Course {
+  id                String       @id @default(auto()) @map("_id") @db.ObjectId
+  title             String       @unique
+  slug              String       @unique
+  cover_image       String?
+  provider          Provider     @relation(fields: [provider_id], references: [id])
+  provider_id       String       @db.ObjectId
+  course_type       COURSE_TYPE
+  category          Category     @relation(fields: [category_id], references: [id])
+  category_id       String       @db.ObjectId
+  subcategory       Subcategory  @relation(fields: [subcategory_id], references: [id])
+  subcategory_id    String       @db.ObjectId
+  level             COURSE_LEVEL
+  state             String?
+  city              String?
+  address           String?
+  lat               Float?
+  lon               Float?
+  duration          Int?
+  short_description String
+  long_description  String
+  price             Float
+  price_info        PRICE_INFO
+  currency          CURRENCY     @default(UZS)
+  num_seats         Int?
+  start_date        String? // in milliseconds
+  teaching_lang     TEACH_LANG
+  schedule          Json?
+  created_at        DateTime     @default(now())
+  updated_at        DateTime     @updatedAt
+}
+
+enum COURSE_TYPE {
+  ONLINE
+  OFLINE
+  BOTH
+}
+
+enum PRICE_INFO {
+  YEAR
+  MONTH
+  HOUR
+  FULL
+}
+
+enum COURSE_LEVEL {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum TEACH_LANG {
+  RU
+  UZ
+  ENG
+  TAJ
+}
+
+enum CURRENCY {
+  UZS
+  USD
+  EUR
+  RUB
+}
+
+// ============================================================================
+
+model Country {
+  id              String  @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  iso3            String
+  iso2            String
+  numeric_code    Int
+  phone_code      Int
+  capital         String
+  currency        String
+  currency_name   String
+  currency_symbol String
+  native          String
+  region          String
+  subregion       String
+  latitude        Float
+  longitude       Float
+  emoji           String
+  emojiU          String
+  timezones       Json[]
+  State           State[]
+}
+
+model State {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  country    Country @relation(fields: [country_id], references: [id])
+  country_id String  @db.String
+  cities     Json
+}
+
+// ============================================================================
+
+model Contact {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  phone String
+  note  String
+}
+
+// ============================================================================
+
+// blog 
+model Author {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  second_name      String
+  avatar           String
+  // socail
+  social_instagram String?
+  social_facebook  String?
+  social_linkedin  String?
+  social_twitter   String?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+  Post             Post[]
+}
+
+model PostCategory {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  title_uz   String
+  title_ru   String
+  slug       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  Post       Post[]
+}
+
+model Post {
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  slug         String
+  cover_image  String
+  read_time    Int //minutes
+  preview_text String
+  body         String
+  author       Author       @relation(fields: [author_id], references: [id])
+  author_id    String       @db.ObjectId
+  category     PostCategory @relation(fields: [category_id], references: [id])
+  category_id  String       @db.ObjectId
+  created_at   DateTime     @default(now())
+  updated_at   DateTime     @updatedAt
+}
+
+// ============================================================================

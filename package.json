@@ -1,0 +1,92 @@
+{
+  "name": "typescript-nextjs-starter",
+  "description": "A TypeScript starter for Next.js that includes all you need to build amazing projects",
+  "version": "1.0.0",
+  "private": true,
+  "author": "João Pedro Schmitz <hey@joaopedro.dev> (@jpedroschmitz)",
+  "license": "MIT",
+  "keywords": [
+    "nextjs",
+    "starter",
+    "typescript"
+  ],
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc",
+    "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
+    "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",
+    "postinstall": "husky install"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
+  "lint-staged": {
+    "./src/**/*.{ts,js,jsx,tsx}": [
+      "eslint --ignore-path .gitignore --fix",
+      "prettier --ignore-path .gitignore --write"
+    ]
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "35.2.1",
+    "@ckeditor/ckeditor5-react": "5.0.2",
+    "@emotion/cache": "11.10.3",
+    "@emotion/react": "11.10.4",
+    "@emotion/server": "11.10.0",
+    "@emotion/styled": "11.10.4",
+    "@fontsource/montserrat": "4.5.12",
+    "@iconify/react": "4.0.0",
+    "@mui/icons-material": "5.10.6",
+    "@mui/lab": "5.0.0-alpha.108",
+    "@mui/material": "5.10.7",
+    "@prisma/client": "4.4.0",
+    "@reduxjs/toolkit": "1.8.6",
+    "axios": "0.27.2",
+    "bcrypt": "5.0.1",
+    "date-fns": "2.29.3",
+    "formik": "2.2.9",
+    "html-react-parser": "3.0.4",
+    "moment": "2.29.4",
+    "next": "12.3.1",
+    "next-auth": "4.12.1",
+    "numeral": "2.0.6",
+    "prop-types": "15.8.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-material-ui-carousel": "3.4.2",
+    "react-phone-number-input": "3.2.12",
+    "react-redux": "8.0.4",
+    "react-slick": "0.29.0",
+    "react-toastify": "9.0.8",
+    "slick-carousel": "1.8.1",
+    "slugify": "1.6.5",
+    "swiper": "8.4.4",
+    "uuid": "9.0.0",
+    "yup": "0.32.11"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.1.2",
+    "@commitlint/config-conventional": "17.1.0",
+    "@types/bcrypt": "5.0.0",
+    "@types/node": "16.11.59",
+    "@types/numeral": "2.0.2",
+    "@types/react": "18.0.21",
+    "@types/react-dom": "18.0.6",
+    "@types/react-slick": "0.23.10",
+    "@types/uuid": "8.3.4",
+    "@typescript-eslint/eslint-plugin": "5.38.0",
+    "@typescript-eslint/parser": "5.38.0",
+    "eslint": "8.23.1",
+    "eslint-config-next": "12.3.1",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-import-resolver-typescript": "3.5.1",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "husky": "8.0.1",
+    "lint-staged": "13.0.3",
+    "prettier": "2.7.1",
+    "prisma": "4.4.0",
+    "typescript": "4.8.3"
+  }
+}
